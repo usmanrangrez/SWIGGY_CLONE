@@ -5,6 +5,18 @@ export const SWIGGY_API_URL =
   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.8258884&lng=80.0395205&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
 export const LOGO_URL =
-  "https://img.freepik.com/free-vector/vintage-restaurant-menu_23-2147491098.jpg?w=826&t=st=1705659321~exp=1705659921~hmac=f42d66b315f0fcb271a1f4db4ecbfad4b28b4c7a9321baebd1735ad13394297c";
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYDIqZPvNyJdwE7FDgLpTBdNG-jPZ-CBCZmQ&usqp=CAU";
 
 export const shimmer_card_unit = 20;
+
+export const ABOUT_IMAGE =
+  "https://foodfire-app.netlify.app/burger-image.ec55d069.png";
+
+export const ERROR_IMAGE =
+  "https://foodfire-app.netlify.app/404%20Error.59df4a5e.jpg";
+
+export const SWIGGY_RESTAURANT_MENU_API_URL =
+  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.8258884&lng=80.0395205&restaurantId=";
+
+export const ITEM_IMG_CDN_URL =
+  "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/";

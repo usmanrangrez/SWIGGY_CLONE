@@ -1,25 +1,35 @@
 import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
-
+import { Link, NavLink } from "react-router-dom";
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
-    <div className="header">
-      <div className="logo-container">
+    <nav className="header">
+      <Link to="/" className="logo-container">
         <img className="logo" src={LOGO_URL} />
-      </div>
+      </Link>
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
-          <button className="login" onClick={() => setIsLoggedIn(!isLoggedIn)}>
-            {isLoggedIn ? "Logout" : "Login"}
-          </button>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+            <NavLink to="/about">About Us</NavLink>
+          </li>
+          <li>
+            <NavLink to="/contact">Contact Us</NavLink>
+          </li>
+          <li onClick={() => setIsLoggedIn(!isLoggedIn)}>
+            {isLoggedIn ? (
+              <NavLink className="login">Logout</NavLink>
+            ) : (
+              <NavLink className="login">Login</NavLink>
+            )}
+          </li>
         </ul>
       </div>
-    </div>
+    </nav>
   );
 };
 

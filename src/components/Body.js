@@ -15,19 +15,32 @@ const Body = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
   const fetchData = async () => {
     try {
-      const data = await axios.get(SWIGGY_API_URL);
-      const res =
-        data?.data?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
-      console.log(res);
-      res
-        ? (setListOfRestaurants(res), setCopyOfListOfRestaurants(res))
-        : console.log("No valid data recieved from API!");
+      const response = await axios.get(SWIGGY_API_URL);
+      const cards = response?.data?.data?.cards;
+      let restaurants;
+
+      for (let i = 0; i < cards?.length; i++) {
+        const res =
+          cards[i]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        if (res) {
+          restaurants = res;
+
+          break;
+        }
+      }
+
+      if (restaurants) {
+        setListOfRestaurants(restaurants);
+        setCopyOfListOfRestaurants(restaurants);
+      } else {
+        console.log("No valid data received from API!");
+        setErrorMessage("No restaurants data available.");
+      }
     } catch (error) {
-      console.log("Error fetching data", error);
+      console.error("Error fetching data", error);
+      setErrorMessage("Failed to fetch data. Please try again.");
     }
   };
 
