@@ -3,6 +3,8 @@ import { useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useRestauarants from "../utils/useRestauarants";
+import useOnline from "../utils/useOnline";
+import UserOffline from "./UserOffline";
 
 const Body = () => {
   const [isTopRatedRestaurants, setIsTopRatedRestaurants] = useState(false);
@@ -16,6 +18,11 @@ const Body = () => {
     setErrorMessage,
   } = useRestauarants();
 
+  const isOnline = useOnline();
+
+  if (!isOnline) {
+    return <UserOffline />;
+  }
   const filterTopRestaurants = () => {
     setIsTopRatedRestaurants((prevState) => {
       if (prevState === true) {
@@ -54,6 +61,10 @@ const Body = () => {
     if (errorMessage) {
       return <h4>No Such Restaurants found,Please reload the page!</h4>;
     }
+  }
+
+  {
+    !isOnline && <div>Oh oh, looks like you are offline!</div>;
   }
 
   return listOfRestaurants?.length === 0 ? (

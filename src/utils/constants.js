@@ -22,4 +22,5 @@ export const ITEM_IMG_CDN_URL =
   "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/";
 
 export const GITHUB_USER_LINK = "https://api.github.com/users/usmanrangrez";
+
 export const GITHUB_LINK = "https://github.com/usmanrangrez";
