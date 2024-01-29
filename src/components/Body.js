@@ -1,48 +1,20 @@
 import { useState } from "react";
-import { SWIGGY_API_URL } from "../utils/constants";
+
 import RestaurantCard from "./RestaurantCard";
-import { useEffect } from "react";
-import axios from "axios";
 import Shimmer from "./Shimmer";
+import useRestauarants from "../utils/useRestauarants";
 
 const Body = () => {
-  const [listOfRestaurants, setListOfRestaurants] = useState([]);
-  const [copyOfListOfRestaurants, setCopyOfListOfRestaurants] = useState([]);
   const [isTopRatedRestaurants, setIsTopRatedRestaurants] = useState(false);
-  const [searchText, setSearchText] = useState("");
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [searchText, setSearchText] = useState();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(SWIGGY_API_URL);
-      const cards = response?.data?.data?.cards;
-      let restaurants;
-
-      for (let i = 0; i < cards?.length; i++) {
-        const res =
-          cards[i]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-        if (res) {
-          restaurants = res;
-
-          break;
-        }
-      }
-
-      if (restaurants) {
-        setListOfRestaurants(restaurants);
-        setCopyOfListOfRestaurants(restaurants);
-      } else {
-        console.log("No valid data received from API!");
-        setErrorMessage("No restaurants data available.");
-      }
-    } catch (error) {
-      console.error("Error fetching data", error);
-      setErrorMessage("Failed to fetch data. Please try again.");
-    }
-  };
+  const {
+    listOfRestaurants,
+    copyOfListOfRestaurants,
+    errorMessage,
+    setListOfRestaurants,
+    setErrorMessage,
+  } = useRestauarants();
 
   const filterTopRestaurants = () => {
     setIsTopRatedRestaurants((prevState) => {

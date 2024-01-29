@@ -1,20 +1,20 @@
-import Header from "./Header";
 import { ABOUT_IMAGE } from "../utils/constants";
+import User from "./User";
+import UserClass from "./UserClass";
 
 const About = () => {
   return (
     <>
       <div className="about-container">
         <div className="about-left">
-          <img className="about_image" src={ABOUT_IMAGE} alt="image_about" />
+          <User />
+          {/* <UserClass name={"Usmaan Rangrez"} /> */}
         </div>
         <div className="about-right">
+          <img className="about_image" src={ABOUT_IMAGE} alt="image_about" />
           <span className="text_1">Welcome to the World</span>
           <span className="text_2">Of Tasty,&</span>
           <span className="text_3">DELECIUUUS FOOD</span>
-          <span className="text_4">
-            "Better you will feel if you eat a healthy meal"
-          </span>
         </div>
       </div>
     </>

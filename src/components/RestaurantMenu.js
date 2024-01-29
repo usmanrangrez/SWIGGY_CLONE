@@ -1,37 +1,12 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import {
-  IMG_CDN_URL,
-  ITEM_IMG_CDN_URL,
-  SWIGGY_RESTAURANT_MENU_API_URL,
-} from "../utils/constants";
+import { IMG_CDN_URL, ITEM_IMG_CDN_URL } from "../utils/constants";
 import { MenuShimmer } from "./Shimmer";
 import { useParams } from "react-router-dom";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
-  const [actualMenu, setActualMenu] = useState([]);
   const { resId } = useParams();
-  console.log(resId);
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
-    try {
-      const data = await axios.get(SWIGGY_RESTAURANT_MENU_API_URL + resId);
-      const info = data?.data?.data?.cards[0]?.card?.card?.info;
-      const menuDets =
-        data?.data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]
-          ?.card?.card;
-
-      setResInfo(info);
-      setActualMenu(menuDets);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { resInfo, actualMenu } = useRestaurantMenu(resId);
 
   return resInfo === null ? (
     <MenuShimmer />
@@ -47,7 +22,7 @@ const RestaurantMenu = () => {
         </div>
         <div className="right-menu">
           <h1>{resInfo?.name}</h1>
-          <h5>{resInfo?.cuisines.join(",")}</h5>
+          <h5>{resInfo?.cuisines?.join(",")}</h5>
           <div className="res-menu-abbr-dets">
             <h6>{resInfo?.avgRating}⭐</h6>
             <h6>{resInfo?.sla?.deliveryTime} Min 🛵</h6>
