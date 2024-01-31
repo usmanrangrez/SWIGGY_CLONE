@@ -2,11 +2,28 @@ import { IMG_CDN_URL, ITEM_IMG_CDN_URL } from "../utils/constants";
 import { MenuShimmer } from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import { useEffect, useState } from "react";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
 
   const { resInfo, actualMenu } = useRestaurantMenu(resId);
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    if (actualMenu && actualMenu.cards) {
+      const cats = actualMenu?.cards?.filter(
+        (c) =>
+          c?.card?.card?.["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+      );
+      setCategories(cats);
+    } else {
+      setCategories([]);
+    }
+  }, [actualMenu]);
 
   return resInfo === null ? (
     <MenuShimmer />
@@ -30,27 +47,11 @@ const RestaurantMenu = () => {
           </div>
         </div>
       </div>
-      <div className="actual-menu">
-        {actualMenu?.itemCards?.map((item, idx) => {
-          return (
-            <div key={idx} className="each-item">
-              <div className="menu-item-left">
-                <div className="menu-item-name"> {item?.card?.info?.name}</div>
-                <div className="menu-item-pricename">
-                  Rs-
-                  {item?.card?.info?.price / 100 ||
-                    item?.card?.info?.defaultPrice / 100}
-                </div>
-              </div>
-              <div className="menu-item-right">
-                <img
-                  className="menu-item-img"
-                  src={ITEM_IMG_CDN_URL + item?.card?.info?.imageId}
-                  alt="Menu-Item_Image"
-                />
-              </div>
-            </div>
-          );
+
+      {/* Catgeories */}
+      <div className="flex flex-col justify-center text-center">
+        {categories?.map((cat, idx) => {
+          return <RestaurantCategory data={cat?.card?.card} key={idx} />;
         })}
       </div>
     </div>

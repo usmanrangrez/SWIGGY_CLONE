@@ -41,14 +41,13 @@ const RestaurantCard = ({
 };
 
 //Higher Order Component
-
 //takes Restaurant card a siput and returns Restautarant card veg
 
 export const vegRestaurantCard = (RestaurantCard) => {
   return (props) => {
     return (
-      <div className="relative bg-green-900">
-        <label className="   bg-green-900 text-white">Veg Only</label>
+      <div className="relative flex flex-col justify-center text-center bg-green-900">
+        <label className="bg-green-900 text-white">Veg Only</label>
         <RestaurantCard {...props} />
       </div>
     );

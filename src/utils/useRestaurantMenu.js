@@ -15,10 +15,10 @@ const useRestaurantMenu = (resId) => {
   const fetchMenu = async () => {
     try {
       const data = await axios.get(SWIGGY_RESTAURANT_MENU_API_URL + resId);
-      const info = data?.data?.data?.cards[0]?.card?.card?.info;
-      const menuDets =
-        data?.data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]
-          ?.card?.card;
+      const info = await data?.data?.data?.cards[0]?.card?.card?.info;
+
+      const menuDets = await data?.data?.data?.cards[2]?.groupedCard
+        ?.cardGroupMap?.REGULAR;
 
       setResInfo(info);
       setActualMenu(menuDets);
