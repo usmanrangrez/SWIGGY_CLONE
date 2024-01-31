@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { vegRestaurantCard } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useRestauarants from "../utils/useRestauarants";
 import useOnline from "../utils/useOnline";
@@ -9,6 +9,7 @@ import UserOffline from "./UserOffline";
 const Body = () => {
   const [isTopRatedRestaurants, setIsTopRatedRestaurants] = useState(false);
   const [searchText, setSearchText] = useState();
+  const RestaurantCardsVeg = vegRestaurantCard(RestaurantCard);
 
   const {
     listOfRestaurants,
@@ -17,6 +18,8 @@ const Body = () => {
     setListOfRestaurants,
     setErrorMessage,
   } = useRestauarants();
+
+  console.log(listOfRestaurants);
 
   const isOnline = useOnline();
 
@@ -30,7 +33,7 @@ const Body = () => {
         setListOfRestaurants(copyOfListOfRestaurants);
       } else {
         // If previously it was false, filter the list
-        const filteredList = copyOfListOfRestaurants.filter(
+        const filteredList = copyOfListOfRestaurants?.filter(
           (res) => res?.info?.avgRating > 4.0
         );
         if (filteredList?.length === 0) {
@@ -48,7 +51,7 @@ const Body = () => {
       setErrorMessage(false);
       return;
     }
-    const searchBasedFilter = copyOfListOfRestaurants.filter((res) => {
+    const searchBasedFilter = copyOfListOfRestaurants?.filter((res) => {
       return res?.info?.name?.toLowerCase().includes(searchText.toLowerCase());
     });
     if (searchBasedFilter?.length === 0) {
@@ -71,7 +74,7 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
+      <div className="filter p-2 ">
         <input
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
@@ -87,7 +90,12 @@ const Body = () => {
       </div>
       <div className="res-container">
         {listOfRestaurants.map((restaurant) => {
-          return (
+          return restaurant?.info?.veg ? (
+            <RestaurantCardsVeg
+              key={restaurant?.info?.id}
+              {...restaurant?.info}
+            />
+          ) : (
             <RestaurantCard key={restaurant?.info?.id} {...restaurant?.info} />
           );
         })}

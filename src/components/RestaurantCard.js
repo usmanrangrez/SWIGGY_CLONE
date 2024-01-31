@@ -12,7 +12,7 @@ const RestaurantCard = ({
 }) => {
   return (
     <Link to={`restaurants/${id}`}>
-      <div className="res-card">
+      <div className="res-card hover:bg-gray-400">
         <img
           className="res-logo"
           src={IMG_CDN_URL + cloudinaryImageId}
@@ -20,14 +20,14 @@ const RestaurantCard = ({
         />
         <div className="res-name-cuis">
           <h3 className="res-name-title">
-            {name.length > 20 ? `${name.substring(0, 20)}...` : name}
+            {name?.length > 20 ? `${name?.substring(0, 20)}...` : name}
           </h3>
         </div>
         <div className="res-dets-cost">
           <h4 className="cuisines">
-            {cuisines.length > 2
-              ? `${cuisines.slice(0, 1).join(",")}...`
-              : cuisines.join(",")}
+            {cuisines?.length > 2
+              ? `${cuisines?.slice(0, 1).join(",")}...`
+              : cuisines?.join(",")}
           </h4>
           <h4 className="res-cost">{`${costForTwo}`}</h4>
         </div>
@@ -38,6 +38,21 @@ const RestaurantCard = ({
       </div>
     </Link>
   );
+};
+
+//Higher Order Component
+
+//takes Restaurant card a siput and returns Restautarant card veg
+
+export const vegRestaurantCard = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div className="relative bg-green-900">
+        <label className="   bg-green-900 text-white">Veg Only</label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
 };
 
 export default RestaurantCard;
