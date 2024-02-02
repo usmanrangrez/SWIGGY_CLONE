@@ -12,6 +12,8 @@ const RestaurantMenu = () => {
 
   const [categories, setCategories] = useState([]);
 
+  const [showIndex, setShowIndex] = useState(null);
+
   useEffect(() => {
     if (actualMenu && actualMenu.cards) {
       const cats = actualMenu?.cards?.filter(
@@ -50,8 +52,18 @@ const RestaurantMenu = () => {
 
       {/* Catgeories */}
       <div className="flex flex-col justify-center text-center">
-        {categories?.map((cat, idx) => {
-          return <RestaurantCategory data={cat?.card?.card} key={idx} />;
+        {categories?.map((cat, index) => {
+          console.log(cat);
+          return (
+            <RestaurantCategory
+              key={cat?.card?.card?.title}
+              data={cat?.card?.card}
+              showItems={index === showIndex ? true : false}
+              setShowIndex={() =>
+                setShowIndex(showIndex === index ? null : index)
+              }
+            />
+          );
         })}
       </div>
     </div>
