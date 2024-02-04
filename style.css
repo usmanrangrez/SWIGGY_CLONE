@@ -96,6 +96,7 @@ html {
 }
 
 .res-logo {
+  border-radius: 7px;
   object-fit: cover;
   height: 50%;
   width: 100%;
@@ -342,15 +343,18 @@ ul li a {
 }
 
 ul li a.active {
-  color: red;
+  text-decoration: underline;
+  font-size: larger;
 }
 
 .login {
   border: none;
-  font-size: 20px;
-  padding: 0 20px;
-  cursor: pointer;
   color: green !important;
+}
+.logout {
+  border: none;
+
+  color: red !important;
 }
 
 .menu-header {
@@ -617,4 +621,8 @@ a {
 
 .image-height {
   height: calc(100vh - 12vh);
+}
+
+.ct-height {
+  height: calc(100vh-12vh);
 }

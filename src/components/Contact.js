@@ -1,6 +1,9 @@
 const Contact = () => {
   return (
-    <section className="bg-blue-50 dark:bg-slate-800 image-height" id="contact">
+    <section
+      className="bg-blue-50 dark:bg-slate-800 image-height "
+      id="contact"
+    >
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="mb-4">
           <div className="mb-6 max-w-3xl text-center md:mx-auto">

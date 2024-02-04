@@ -53,7 +53,6 @@ const RestaurantMenu = () => {
       {/* Catgeories */}
       <div className="flex flex-col justify-center text-center">
         {categories?.map((cat, index) => {
-          console.log(cat);
           return (
             <RestaurantCategory
               key={cat?.card?.card?.title}

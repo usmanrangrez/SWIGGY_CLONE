@@ -5,6 +5,7 @@ import Shimmer from "./Shimmer";
 import useRestauarants from "../utils/useRestauarants";
 import useOnline from "../utils/useOnline";
 import UserOffline from "./UserOffline";
+import { useUserContext } from "../utils/UserContext";
 
 const Body = () => {
   const [isTopRatedRestaurants, setIsTopRatedRestaurants] = useState(false);
@@ -18,8 +19,6 @@ const Body = () => {
     setListOfRestaurants,
     setErrorMessage,
   } = useRestauarants();
-
-  console.log(listOfRestaurants);
 
   const isOnline = useOnline();
 
