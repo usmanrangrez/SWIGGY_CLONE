@@ -60,7 +60,7 @@ const Login = () => {
             name="email"
             type="email"
             placeholder="Enter email"
-            value={userDets.email}
+            value={userDets.email ?? ""}
             onChange={handleChange}
             className="w-[250px] h-[40px] rounded-lg px-3"
           />
@@ -69,7 +69,7 @@ const Login = () => {
               name="password"
               type={passwordShown ? "text" : "password"}
               placeholder="Enter password"
-              value={userDets.password}
+              value={userDets.password ?? ""}
               onChange={handleChange}
               className="w-full h-[40px] rounded-lg px-3"
             />
