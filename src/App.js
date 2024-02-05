@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -12,6 +12,9 @@ import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./components/Cart";
 import Footer from "./components/Footer";
+import Login from "./components/Login";
+import { AuthProvider } from "./utils/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
@@ -32,7 +35,11 @@ const AppLayout = () => {
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
+    element: (
+      <AuthProvider>
+        <AppLayout />
+      </AuthProvider>
+    ),
     children: [
       {
         path: "/",
@@ -56,7 +63,15 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "/restaurants/:resId",

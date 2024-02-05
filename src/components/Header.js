@@ -1,38 +1,28 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import { LOGO_URL } from "../utils/constants";
-import { Link, NavLink } from "react-router-dom";
-import useOnline from "../utils/useOnline";
-import { useUserContext } from "../utils/UserContext";
-import { useSelector } from "react-redux";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import useOnline from "../utils/useOnline"; // Custom hook to check online status
+import { useSelector } from "react-redux"; // To access cart items count
+import { useAuth } from "../utils/AuthContext"; // Custom hook for auth context
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const isOnline = useOnline();
-  const { loggedInUser, setLoggedInUser } = useUserContext();
+  const { isLoggedIn, setIsLoggedIn } = useAuth(); // Accessing global auth state
+  const isOnline = useOnline(); // Online status
+  const cartItems = useSelector((store) => store.cart.items); // Cart items from Redux store
+  const navigate = useNavigate(); // Hook for programmatic navigation
 
-  const cartItems = useSelector((store) => store.cart.items);
-  //Authentication Code
-  useEffect(() => {
-    //Make API call and send username and pass
-    // imagine we got this
-
-    setLoggedInUser("Usmaan");
-  }, []);
-  useEffect(() => {
-    //Make API call and send username and pass
-    // imagine we got this
-
-    setLoggedInUser("Usmaan");
-  }, []);
+  // Handles the logout process
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Update auth state globally
+    localStorage.removeItem("userDetailsSwiggy"); // Optional: Clear persisted login state
+    navigate("/login"); // Redirect to login page
+  };
 
   return (
     <nav className="header">
       <Link to="/" className="logo-container">
-        <img className="logo" src={LOGO_URL} />
+        <img src={LOGO_URL} alt="Logo" className="logo" />
       </Link>
-      {loggedInUser && (
-        <div className="text-2xl font-bold "> Welcome,{loggedInUser || ""}</div>
-      )}
       <div className="nav-items">
         <ul>
           <li>
@@ -50,15 +40,21 @@ const Header = () => {
           <li>
             <NavLink to="/cart">Cart ({cartItems.length})</NavLink>
           </li>
-          <li onClick={() => setIsLoggedIn(!isLoggedIn)}>
-            {isLoggedIn ? (
-              <button className="logout">Logout</button>
-            ) : (
-              <button className="login">Login</button>
-            )}
-          </li>
-          <li className="online-header">
-            {isOnline ? <NavLink>✅</NavLink> : <NavLink>🔴</NavLink>}
+          {isLoggedIn ? (
+            <li>
+              <button onClick={handleLogout} className="logout">
+                Logout
+              </button>
+            </li>
+          ) : (
+            <li>
+              <NavLink to="/login" className="login">
+                Login
+              </NavLink>
+            </li>
+          )}
+          <li className="online-status">
+            {isOnline ? "✅ Online" : "🔴 Offline"}
           </li>
         </ul>
       </div>

@@ -3,7 +3,7 @@ import { createContext, useState, useContext } from "react";
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const [loggedInUser, setLoggedInUser] = useState();
+  const [loggedInUser, setLoggedInUser] = useState("");
 
   // Provide an object to context consumers
   const value = { loggedInUser, setLoggedInUser };

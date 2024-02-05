@@ -7,13 +7,10 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const handleIncrement = (item) => {
-    // Assuming addItem action can be reused for incrementing the item quantity
     dispatch(addItem(item));
   };
 
   const handleDecrement = (item) => {
-    // Assuming removeItem action can be reused for decrementing the item quantity
-    // and requires the item ID as payload
     dispatch(removeItem(item));
   };
 
@@ -25,7 +22,7 @@ const Cart = () => {
     const pricePerItem =
       (item?.card?.info?.defaultPrice || item?.card?.info?.price) / 100;
     return acc + pricePerItem * item.quantity;
-  }, 0); // Start accumulating from 0
+  }, 0);
 
   return (
     <div className="flex w-full bg-yellow-200">
