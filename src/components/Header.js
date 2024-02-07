@@ -17,7 +17,6 @@ const Header = () => {
     localStorage.removeItem("userDetailsSwiggy"); // Optional: Clear persisted login state
     navigate("/login"); // Redirect to login page
   };
-
   return (
     <nav className="header">
       <Link to="/" className="logo-container">
@@ -48,9 +47,9 @@ const Header = () => {
             </li>
           ) : (
             <li>
-              <NavLink to="/login" className="login">
+              <button to="/login" className="login">
                 Login
-              </NavLink>
+              </button>
             </li>
           )}
           <li className="online-status">

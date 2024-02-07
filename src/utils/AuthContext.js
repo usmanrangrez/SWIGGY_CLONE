@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { createContext, useState } from "react";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(
