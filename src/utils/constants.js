@@ -24,3 +24,6 @@ export const ITEM_IMG_CDN_URL =
 export const GITHUB_USER_LINK = "https://api.github.com/users/usmanrangrez";
 
 export const GITHUB_LINK = "https://github.com/usmanrangrez";
+
+export const CORS_EXTENSION_LINK =
+  "https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf";

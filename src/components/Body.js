@@ -5,6 +5,8 @@ import Shimmer from "./Shimmer";
 import useRestauarants from "../utils/useRestauarants";
 import useOnline from "../utils/useOnline";
 import UserOffline from "../components/UserOffline";
+import { Link } from "react-router-dom";
+import { CORS_EXTENSION_LINK } from "../utils/constants";
 
 const Body = () => {
   const [isTopRatedRestaurants, setIsTopRatedRestaurants] = useState(false);
@@ -60,7 +62,39 @@ const Body = () => {
 
   {
     if (errorMessage) {
-      return <h4>No Such Restaurants found,Please reload the page!</h4>;
+      return (
+        <div className="max-w-md mx-auto text-center p-6 bg-white shadow-md rounded-lg">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            Trouble Loading Data?
+          </h3>
+          <p className="text-sm font-bold text-gray-600 mb-2">
+            If this is your first time visiting and the data isn't loading
+            properly, it might be due to browser restrictions.
+          </p>
+          <p className="text-sm font-bold text-gray-600 mb-4">
+            For a quick fix during development, consider installing a CORS
+            extension for your browser.
+            <Link
+              to={CORS_EXTENSION_LINK}
+              target="_blank"
+              className="text-blue-500 hover:text-blue-600 underline"
+            >
+              Learn how
+            </Link>{" "}
+            (Chrome)
+          </p>
+          <p className="text-sm text-gray-600">
+            If you're seeing this message under other circumstances, there might
+            be a different issue,either{" "}
+            <span className="font-bolder">Restauarnt is Not Found</span> or
+            Please check be a different issue,either{" "}
+            <span className="font-extrabold text-base">
+              Restauarnt is Not Found
+            </span>{" "}
+            or Please check your connection or try again later.
+          </p>
+        </div>
+      );
     }
   }
 
