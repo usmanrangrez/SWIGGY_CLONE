@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import RestaurantCard, { vegRestaurantCard } from "../RestaurantCard";
 import { BrowserRouter } from "react-router-dom";
-import mockData from "../mocks/resCardMock.json";
+import mockData from "../__mocks__/resCardMock.json";
 import "@testing-library/jest-dom";
 
 //describe is a Jest method used to group together related tests in a test suite. The first argument is a string describing the test suite, and the second argument is a function containing the individual tests.

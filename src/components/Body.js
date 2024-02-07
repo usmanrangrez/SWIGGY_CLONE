@@ -4,7 +4,7 @@ import RestaurantCard, { vegRestaurantCard } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useRestauarants from "../utils/useRestauarants";
 import useOnline from "../utils/useOnline";
-import UserOffline from "./UserOffline";
+import UserOffline from "../components/UserOffline";
 
 const Body = () => {
   const [isTopRatedRestaurants, setIsTopRatedRestaurants] = useState(false);
